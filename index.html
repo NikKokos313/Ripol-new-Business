@@ -1,0 +1,2506 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рипол Бизнес — Заказать издание книги</title>
+    <meta name="description" content="Издать книгу поможет «Рипол Бизнес». Профессиональная подготовка рукописи: редактура, корректура, дизайн обложки, верстка. Работаем с авторами на всех этапах. Узнайте условия на сайте!" />
+    <link rel="canonical" href="https://ripol-business.ru/">
+                <style>
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap");
+/* ============================================================
+   RIPOL BUSINESS — Premium Design System 2026
+   Aesthetic: Refined Luxury × Editorial × Deep Navy
+   Fonts: Playfair Display (headings) + DM Sans (body)
+   ============================================================ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+    --navy:        #0d1f3c;
+    --navy-mid:    #152b52;
+    --navy-light:  #1e3a6e;
+    --accent:      #c8a96e;         /* warm gold */
+    --accent-light:#e4c98a;
+    --off-white:   #ffffff;
+    --white:       #ffffff;
+    --ink:         #0d1520;
+    --muted:       #5a677a;
+    --border:      rgba(255,255,255,0.10);
+    --border-dark: rgba(13,31,60,0.10);
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+    --radius-sm:  8px;
+    --radius-md:  14px;
+    --radius-lg:  22px;
+    --radius-xl:  32px;
+
+    --shadow-sm:  0 2px 8px rgba(13,31,60,0.08);
+    --shadow-md:  0 8px 28px rgba(13,31,60,0.12);
+    --shadow-lg:  0 20px 50px rgba(13,31,60,0.16);
+    --shadow-xl:  0 30px 70px rgba(13,31,60,0.22);
+
+    --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink);
+    background-color: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.no-scroll { overflow: hidden; }
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+.visually-hidden {
+    position:absolute; width:1px; height:1px; padding:0;
+    margin:-1px; overflow:hidden; clip:rect(0,0,0,0);
+    white-space:nowrap; border:0;
+}
+
+/* ── Background canvas (subtle floating orbs) ──────────────── */
+.bg-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+.bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.06;
+}
+.bg-orb--1 { width:600px; height:600px; background:var(--navy-light); top:-200px; right:-150px; }
+.bg-orb--2 { width:500px; height:500px; background:var(--accent);     bottom:200px; left:-180px; animation: orbFloat 18s ease-in-out infinite alternate; }
+.bg-orb--3 { width:400px; height:400px; background:var(--navy);       top:50%;  right:10%;  animation: orbFloat 22s ease-in-out infinite alternate-reverse; }
+
+@keyframes orbFloat {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(30px, -40px); }
+}
+
+/* ── Scroll reveal ──────────────────────────────────────────── */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1) var(--delay, 0s),
+                transform 0.7s cubic-bezier(0.4,0,0.2,1) var(--delay, 0s);
+}
+.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Section header (label + title) ────────────────────────── */
+.section-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+.section-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding: 5px 14px;
+    border: 1px solid rgba(200,169,110,0.35);
+    border-radius: 100px;
+    background: rgba(200,169,110,0.06);
+}
+.section-label--light {
+    color: rgba(255,255,255,0.7);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0;
+    transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+}
+.header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(13,31,60,0.08), var(--shadow-sm);
+}
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 10px;
+    z-index: 11;
+}
+.logo__icon { font-size: 1.75rem; }
+.logo__text {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    transition: color var(--transition);
+    letter-spacing: -0.01em;
+}
+.header.scrolled .logo__text { color: var(--navy); }
+
+.nav { display: flex; align-items: center; }
+
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+.burger__line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s, background-color var(--transition);
+}
+.header.scrolled .burger__line { background-color: var(--navy); }
+
+.menu { display: flex; flex-wrap: wrap; justify-content: center; list-style: none; gap: 6px 18px; }
+.menu__item--phone { display: none; }
+.menu__link {
+    text-decoration: none;
+    color: rgba(255,255,255,0.82);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 6px 2px;
+    position: relative;
+    transition: color var(--transition);
+}
+.menu__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width var(--transition);
+    border-radius: 1px;
+}
+.menu__link:hover { color: var(--white); }
+.menu__link:hover::after { width: 100%; }
+.header.scrolled .menu__link { color: var(--muted); }
+.header.scrolled .menu__link:hover { color: var(--navy); }
+
+.menu__link--phone { display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--white); }
+.header.scrolled .menu__link--phone { color: var(--navy); }
+
+.phone {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 600;
+    gap: 6px;
+    z-index: 11;
+    padding: 9px 20px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 100px;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+    color: var(--white);
+    font-size: 0.92rem;
+}
+.phone:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.5);
+}
+.header.scrolled .phone {
+    color: var(--navy);
+    border-color: rgba(13,31,60,0.2);
+}
+.header.scrolled .phone:hover {
+    background: rgba(13,31,60,0.05);
+    border-color: rgba(13,31,60,0.4);
+}
+.phone__icon { display: none; }
+.phone__number { font-size: 0.92rem; }
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero-section {
+    position: relative;
+    background: linear-gradient(155deg, #071526 0%, #0d1f3c 40%, #162d54 75%, #1a3460 100%);
+    padding: 160px 0 90px;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Hero BG decorations */
+.hero-section__bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.hero-section__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent);
+}
+.hero-section__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+.hero-section__glow--1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation: glowPulse 8s ease-in-out infinite alternate;
+}
+.hero-section__glow--2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(30,58,110,0.5) 0%, transparent 70%);
+    bottom: -150px; left: -100px;
+    animation: glowPulse 12s ease-in-out infinite alternate-reverse;
+}
+@keyframes glowPulse {
+    from { opacity: 0.6; transform: scale(1); }
+    to   { opacity: 1;   transform: scale(1.12); }
+}
+
+.hero {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 64px;
+}
+.hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--accent-light);
+    margin-bottom: 28px;
+}
+.hero__badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 6px var(--accent); }
+    50%       { box-shadow: 0 0 14px var(--accent), 0 0 20px rgba(200,169,110,0.4); }
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+}
+.hero__descriptor {
+    max-width: 700px;
+    margin: 0 auto 42px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.75;
+    font-weight: 300;
+}
+.hero__actions { display: flex; justify-content: center; gap: 16px; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 36px;
+    font-family: var(--font-body);
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: background var(--transition), color var(--transition),
+                transform var(--transition), box-shadow var(--transition),
+                border-color var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+    white-space: nowrap;
+}
+.btn svg { flex-shrink: 0; transition: transform var(--transition); }
+.btn:hover svg { transform: translateX(4px); }
+
+.btn--primary {
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.btn--primary:hover {
+    background: var(--accent);
+    color: var(--navy);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(200,169,110,0.4);
+}
+
+.btn--full { width: 100%; justify-content: center; }
+
+.btn--submit {
+    background: var(--navy);
+    color: var(--white);
+}
+.btn--submit:hover {
+    background: var(--navy-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn--form-submit {
+    background: var(--white);
+    color: var(--navy);
+    font-weight: 700;
+}
+.btn--form-submit:hover {
+    background: var(--accent);
+    color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,169,110,0.35);
+}
+
+.btn--order {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid rgba(13,31,60,0.2);
+    padding: 11px 22px;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    font-weight: 600;
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    transition: background var(--transition), color var(--transition),
+                border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn--order:hover {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn--cta {
+    background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+    color: var(--white);
+    padding: 16px 44px;
+    box-shadow: var(--shadow-md);
+}
+.btn--cta:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+    background: linear-gradient(135deg, var(--accent) 0%, #a88040 100%);
+    color: var(--navy);
+}
+.btn--cta-dark {
+    background: var(--white);
+    color: var(--navy);
+}
+.btn--cta-dark:hover {
+    background: var(--accent);
+    color: var(--navy);
+}
+
+/* ── Advantages (hero cards) ─────────────────────────────────── */
+.advantages__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+}
+.advantages__item {
+    flex: 1 1 260px;
+    max-width: 340px;
+    min-width: 220px;
+    text-align: left;
+    padding: 28px 28px 24px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    transition: background var(--transition), border-color var(--transition),
+                transform var(--transition), box-shadow var(--transition);
+}
+.advantages__item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,169,110,0.08), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.advantages__item:hover {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(200,169,110,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+.advantages__item:hover::before { opacity: 1; }
+.advantages__icon {
+    display: block;
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+}
+.advantages__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 0;
+    flex: 1;
+}
+.advantages__arrow {
+    position: absolute;
+    bottom: 20px; right: 22px;
+    font-size: 1.1rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity var(--transition), transform var(--transition);
+}
+.advantages__item:hover .advantages__arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ── Services ────────────────────────────────────────────────── */
+.services {
+    padding: 110px 0;
+    background-color: var(--white);
+    position: relative;
+}
+.services__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+}
+.services__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    list-style: none;
+    justify-content: center;
+}
+.services__item {
+    flex: 0 1 calc(33.333% - 16px);
+    min-width: 280px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(13,31,60,0.06);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+.services__item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(13,31,60,0.12);
+}
+.service__image {
+    height: 180px;
+    background: linear-gradient(135deg, #e8ecf4 0%, #d8dde8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.service__image-placeholder {
+    font-size: 3rem;
+    position: relative;
+    z-index: 1;
+    transition: transform var(--transition);
+}
+.services__item:hover .service__image-placeholder {
+    transform: scale(1.15) translateY(-4px);
+}
+.service__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(13,31,60,0.0), rgba(13,31,60,0.08));
+    transition: opacity var(--transition);
+}
+.services__item:hover .service__image-overlay { opacity: 0; }
+.service__body {
+    padding: 0 0 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.service__name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: 22px 22px 16px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    flex: 1;
+}
+
+/* ── Contact form section ────────────────────────────────────── */
+.contact-form-section {
+    position: relative;
+    background: linear-gradient(150deg, #0d1f3c 0%, #162d54 50%, #1a3460 100%);
+    padding: 100px 0;
+    overflow: hidden;
+}
+.contact-form-section__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.contact-form-section__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.4) 80%, transparent);
+}
+.contact-form-section__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+.contact-form-section__text { color: var(--white); }
+.contact-form-section__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--white);
+    line-height: 1.2;
+    margin-top: 16px;
+}
+.contact-form-section__subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    font-weight: 300;
+}
+.contact-form-section__trust { display: flex; flex-direction: column; gap: 12px; }
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+}
+.trust-item__dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+/* Form styles */
+.contact-form, .callback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.contact-form .form-group,
+.callback-form .form-group { width: 100%; }
+.form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 7px;
+}
+.modal__body .form-label { color: var(--muted); }
+.form-control {
+    width: 100%;
+    padding: 13px 18px;
+    font-family: var(--font-body);
+    font-size: 0.97rem;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+.form-control::placeholder { color: rgba(255,255,255,0.38); }
+.form-control:focus {
+    border-color: rgba(200,169,110,0.7);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+}
+.modal__body .form-control {
+    background: var(--white);
+    border-color: rgba(13,31,60,0.15);
+    color: var(--ink);
+}
+.modal__body .form-control::placeholder { color: #aab0bb; }
+.modal__body .form-control:focus {
+    border-color: var(--navy-light);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(13,31,60,0.1);
+}
+.form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+}
+.modal__body .form-check { color: var(--muted); }
+.form-check input[type="checkbox"] {
+    margin-top: 2px;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+}
+.form-check a { color: var(--accent-light); text-decoration: underline; }
+.modal__body .form-check a { color: var(--navy-light); }
+.form-check a:hover { text-decoration: none; }
+
+/* ── Stages ──────────────────────────────────────────────────── */
+.stages {
+    padding: 110px 0;
+    background: linear-gradient(150deg, #071526 0%, #0d1f3c 50%, #142848 100%);
+    position: relative;
+    overflow: hidden;
+}
+.stages::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 15%, rgba(0,0,0,0.5) 85%, transparent);
+    pointer-events: none;
+}
+.stages__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+}
+.stages__timeline {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.stages__timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    bottom: 30px;
+    width: 2px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        var(--accent) 8%,
+        rgba(200,169,110,0.4) 80%,
+        transparent 100%
+    );
+    border-radius: 2px;
+}
+.stage-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 28px;
+    position: relative;
+}
+.stage-item:last-child { margin-bottom: 0; }
+.stage-item__marker {
+    flex-shrink: 0;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(200,169,110,0.2), rgba(200,169,110,0.05));
+    border: 2px solid rgba(200,169,110,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 5px rgba(200,169,110,0.08), 0 4px 16px rgba(0,0,0,0.4);
+    transition: transform var(--transition), border-color var(--transition),
+                box-shadow var(--transition), background var(--transition);
+}
+.stage-item:hover .stage-item__marker {
+    transform: scale(1.12);
+    background: linear-gradient(135deg, rgba(200,169,110,0.35), rgba(200,169,110,0.1));
+    border-color: var(--accent);
+    box-shadow: 0 0 0 5px rgba(200,169,110,0.15), 0 8px 24px rgba(200,169,110,0.35);
+}
+.stage-item__icon { font-size: 1.5rem; }
+.stage-item__content {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+    padding: 22px 28px;
+    flex: 1;
+    transition: background var(--transition), box-shadow var(--transition),
+                transform var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.stage-item__content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), rgba(200,169,110,0.3));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    border-radius: 0 2px 2px 0;
+}
+.stage-item:hover .stage-item__content {
+    background: rgba(255,255,255,0.09);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    transform: translateX(8px);
+    border-color: rgba(200,169,110,0.35);
+}
+.stage-item:hover .stage-item__content::before { transform: scaleY(1); }
+.stage-item__step {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 7px;
+    opacity: 0.9;
+}
+.stage-item__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f0f4ff;
+    margin-bottom: 9px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+.stage-item__desc {
+    font-size: 0.93rem;
+    color: rgba(200,215,255,0.72);
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 300;
+}
+.stages__action { text-align: center; margin-top: 56px; }
+
+/* ── About (advantages grid) ─────────────────────────────────── */
+.about {
+    padding: 110px 0;
+    background: linear-gradient(150deg, #0a1a33 0%, #0d1f3c 50%, #142848 100%);
+    position: relative;
+    overflow: hidden;
+}
+.about::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+.about__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+}
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+.about__column { display: flex; flex-direction: column; gap: 24px; }
+.about__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 32px 32px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: none;
+    transition: transform var(--transition), box-shadow var(--transition),
+                border-color var(--transition), background var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.about__item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+.about__item:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.11);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    border-color: rgba(200,169,110,0.4);
+}
+.about__item:hover::after { transform: scaleX(1); }
+.about__num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.55;
+    min-width: 54px;
+    line-height: 1;
+    padding-top: 2px;
+    transition: opacity var(--transition);
+}
+.about__item:hover .about__num { opacity: 1; }
+.about__item-content { flex: 1; }
+.about__item-title {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+.about__item-text {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.65;
+}
+
+/* ── Modal ───────────────────────────────────────────────────── */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal.is-open { display: flex; }
+.modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(7,15,30,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.modal__container {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 44px 36px 40px;
+    box-shadow: var(--shadow-xl);
+    z-index: 1;
+    animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal__close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--muted);
+    transition: background var(--transition), color var(--transition);
+}
+.modal__close:hover { background: #e8e6e0; color: var(--ink); }
+.modal__icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+}
+.modal__title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+}
+.modal__subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .services__item { flex: 0 1 calc(50% - 12px); min-width: 240px; }
+    .contact-form-section__inner { gap: 50px; }
+}
+
+@media (max-width: 768px) {
+    .header__container { flex-wrap: nowrap; }
+    .phone { display: none; }
+
+    .burger {
+        display: flex;
+        position: static;
+        transform: none;
+    }
+    .nav { order: 0; width: auto; margin-left: auto; }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 72px; left: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: var(--shadow-lg);
+        padding: 20px 28px;
+        gap: 4px;
+        z-index: 50;
+    }
+    .menu--open { display: flex; }
+    .menu__item--phone { display: list-item; }
+    .menu__link { color: var(--navy); font-size: 1rem; padding: 10px 0; }
+    .menu__link:hover { color: var(--navy-light); }
+    .menu__link--phone { color: var(--navy); }
+
+    .hero-section { padding: 120px 0 70px; min-height: auto; }
+    .hero__title { font-size: 2rem; }
+    .hero__descriptor { font-size: 1rem; }
+
+    .advantages__list { gap: 14px; }
+    .advantages__item { flex: 1 1 100%; max-width: 100%; min-width: 0; }
+
+    .services { padding: 80px 0; }
+    .services__item { flex: 1 1 100%; min-width: 0; }
+
+    .contact-form-section { padding: 70px 0; }
+    .contact-form-section__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .stages { padding: 80px 0; }
+    .stages__timeline::before { left: 28px; }
+    .stage-item { gap: 18px; margin-bottom: 24px; }
+    .stage-item__marker { width: 52px; height: 52px; }
+    .stage-item__content { padding: 16px 20px; }
+    .stage-item__title { font-size: 1.05rem; }
+
+    .about { padding: 80px 0; }
+    .about__grid { grid-template-columns: 1fr; }
+    .about__column { gap: 16px; }
+    .about__item { padding: 24px 24px; gap: 18px; }
+    .about__num { font-size: 1.8rem; min-width: 46px; }
+
+    .modal__container { padding: 32px 24px 28px; border-radius: var(--radius-lg); }
+    .modal__title { font-size: 1.5rem; }
+
+    .section-header { margin-bottom: 40px; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 18px; }
+    .hero__badge { font-size: 0.7rem; }
+    .hero__title { font-size: 1.75rem; }
+    .btn { padding: 13px 28px; font-size: 0.92rem; }
+    .btn--order { width: calc(100% - 28px); margin: 0 14px 16px; }
+    .stages__timeline::before { display: none; }
+    .stage-item__marker { display: none; }
+    .stage-item { gap: 0; }
+    .stage-item__content { padding: 16px 18px; }
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+.footer {
+    background: linear-gradient(175deg, #071526 0%, #0d1f3c 100%);
+    color: rgba(255,255,255,0.65);
+    padding: 80px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.5), transparent);
+}
+.footer__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.footer__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.07;
+}
+.footer__orb--1 {
+    width: 500px; height: 500px;
+    background: var(--accent);
+    bottom: -200px; right: -100px;
+}
+.footer__orb--2 {
+    width: 350px; height: 350px;
+    background: var(--navy-light);
+    top: -100px; left: -80px;
+}
+
+.footer__top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Brand column */
+.footer__brand {}
+.footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 18px;
+}
+.footer__logo-icon { font-size: 1.75rem; }
+.footer__logo-text {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.01em;
+}
+.footer__tagline {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 28px;
+    max-width: 280px;
+    font-weight: 300;
+}
+.footer__contacts { display: flex; flex-direction: column; gap: 10px; }
+.footer__contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: color var(--transition);
+}
+.footer__contact-link:hover { color: var(--accent-light); }
+.footer__contact-icon { font-size: 1rem; }
+
+/* Nav columns */
+.footer__col-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+}
+.footer__nav { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer__nav-link {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 400;
+    transition: color var(--transition), padding-left var(--transition);
+    display: inline-block;
+    position: relative;
+}
+.footer__nav-link::before {
+    content: '';
+    position: absolute;
+    left: -12px; top: 50%;
+    transform: translateY(-50%);
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.footer__nav-link:hover {
+    color: var(--white);
+    padding-left: 14px;
+}
+.footer__nav-link:hover::before { opacity: 1; }
+
+/* Social icons */
+.footer__socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+.footer__social {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.65);
+    transition: background var(--transition), border-color var(--transition),
+                transform var(--transition), color var(--transition);
+}
+.footer__social:hover {
+    background: rgba(200,169,110,0.15);
+    border-color: rgba(200,169,110,0.4);
+    color: var(--accent-light);
+    transform: translateY(-3px);
+}
+
+/* Award badge */
+.footer__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 100px;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    color: var(--accent-light);
+    margin-top: 20px;
+    font-weight: 500;
+}
+.footer__badge-icon { font-size: 0.9rem; }
+
+/* Bottom bar */
+.footer__bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 22px 0;
+    position: relative;
+    z-index: 1;
+}
+.footer__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.footer__copyright {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+}
+.footer__legal {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+}
+.footer__legal a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+.footer__legal a:hover { color: rgba(255,255,255,0.7); }
+
+/* Footer responsive */
+@media (max-width: 1024px) {
+    .footer__top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 600px) {
+    .footer { padding: 60px 0 0; }
+    .footer__top { grid-template-columns: 1fr; gap: 32px; }
+    .footer__bottom-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer__legal { flex-wrap: wrap; gap: 14px; }
+}
+
+/* ── Block 6: Second contact form ───────────────────────────── */
+.cta-form-section {
+    position: relative;
+    background: linear-gradient(150deg, #0d1f3c 0%, #162d54 50%, #1a3460 100%);
+    padding: 100px 0;
+    overflow: hidden;
+}
+.cta-form-section__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.cta-form-section__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.4) 80%, transparent);
+}
+.cta-form-section__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+.cta-form-section__glow--1 {
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, rgba(200,169,110,0.15) 0%, transparent 70%);
+    top: -150px; right: -80px;
+    animation: glowPulse 10s ease-in-out infinite alternate;
+}
+.cta-form-section__glow--2 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(30,58,110,0.5) 0%, transparent 70%);
+    bottom: -100px; left: -80px;
+    animation: glowPulse 14s ease-in-out infinite alternate-reverse;
+}
+.cta-form-section__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+.cta-form-section__text { color: var(--white); }
+.cta-form-section__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--white);
+    line-height: 1.2;
+    margin-top: 16px;
+}
+.cta-form-section__subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    font-weight: 300;
+}
+.cta-form-section__trust { display: flex; flex-direction: column; gap: 12px; }
+.cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.cta-form .form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 7px;
+}
+.cta-form .form-control {
+    width: 100%;
+    padding: 13px 18px;
+    font-family: var(--font-body);
+    font-size: 0.97rem;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+.cta-form .form-control::placeholder { color: rgba(255,255,255,0.38); }
+.cta-form .form-control:focus {
+    border-color: rgba(200,169,110,0.7);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+}
+.cta-form .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+}
+.cta-form .form-check a { color: var(--accent-light); text-decoration: underline; }
+.cta-form .form-check a:hover { text-decoration: none; }
+.cta-form .form-check input[type="checkbox"] {
+    margin-top: 2px;
+    width: 15px; height: 15px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+}
+.btn--cta-submit {
+    background: var(--white);
+    color: var(--navy);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn--cta-submit svg { transition: transform var(--transition); }
+.btn--cta-submit:hover svg { transform: translateX(4px); }
+.btn--cta-submit:hover {
+    background: var(--accent);
+    color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,169,110,0.35);
+}
+@media (max-width: 1024px) {
+    .cta-form-section__inner { gap: 50px; }
+}
+@media (max-width: 768px) {
+    .cta-form-section { padding: 70px 0; }
+    .cta-form-section__inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ── Block 7: Reviews ────────────────────────────────────────── */
+.reviews {
+    padding: 110px 0;
+    background: var(--white);
+    position: relative;
+}
+.reviews__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+}
+.reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+}
+.review-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    border: 1px solid rgba(13,31,60,0.06);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.review-card::before {
+    content: '❝';
+    position: absolute;
+    top: 18px; right: 22px;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(200,169,110,0.15);
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(200,169,110,0.25);
+}
+.review-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.review-card__avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(13,31,60,0.2);
+    font-weight: 700;
+    color: var(--white);
+    font-family: var(--font-display);
+}
+.review-card__avatar--gold {
+    background: linear-gradient(135deg, var(--accent), #a88040);
+}
+.review-card__avatar--teal {
+    background: linear-gradient(135deg, #1a6b6b, #0e4a4a);
+}
+.review-card__info { flex: 1; min-width: 0; }
+.review-card__name {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.review-card__role {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+.review-card__stars {
+    display: flex;
+    gap: 3px;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+.review-card__star { color: var(--accent); }
+.review-card__star--empty { color: rgba(200,169,110,0.25); }
+.review-card__text {
+    font-size: 0.95rem;
+    color: #4a5568;
+    line-height: 1.72;
+    font-weight: 300;
+    flex: 1;
+}
+.review-card__date {
+    font-size: 0.75rem;
+    color: rgba(90,103,122,0.6);
+    font-weight: 400;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(13,31,60,0.06);
+}
+.reviews__action { text-align: center; }
+.btn--reviews {
+    background: transparent;
+    color: var(--navy);
+    border: 2px solid rgba(13,31,60,0.2);
+    padding: 14px 40px;
+    border-radius: 100px;
+    font-weight: 600;
+}
+.btn--reviews:hover {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+@media (max-width: 1024px) {
+    .reviews__grid { grid-template-columns: 1fr; gap: 18px; }
+}
+@media (max-width: 768px) {
+    .reviews { padding: 80px 0; }
+}
+
+/* ── Block 8: FAQ ────────────────────────────────────────────── */
+.faq {
+    padding: 110px 0;
+    background: var(--white);
+    position: relative;
+}
+.faq__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+}
+.faq__list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.faq-item {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(13,31,60,0.08);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition), border-color var(--transition);
+}
+.faq-item.is-open {
+    border-color: rgba(200,169,110,0.3);
+    box-shadow: var(--shadow-md);
+}
+.faq-item__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+    transition: background var(--transition);
+}
+.faq-item__btn:hover { background: rgba(13,31,60,0.02); }
+.faq-item.is-open .faq-item__btn { background: rgba(200,169,110,0.04); }
+.faq-item__q {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    flex: 1;
+    transition: color var(--transition);
+}
+.faq-item.is-open .faq-item__q { color: var(--navy); }
+.faq-item__icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(13,31,60,0.06);
+    display: flex; align-items: center; justify-content: center;
+    transition: background var(--transition), transform var(--transition);
+}
+.faq-item.is-open .faq-item__icon {
+    background: rgba(200,169,110,0.15);
+    transform: rotate(45deg);
+}
+.faq-item__icon svg { transition: stroke var(--transition); }
+.faq-item.is-open .faq-item__icon svg { stroke: var(--accent); }
+.faq-item__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.38s cubic-bezier(0.4,0,0.2,1);
+}
+.faq-item.is-open .faq-item__body {
+    grid-template-rows: 1fr;
+}
+.faq-item__body-inner {
+    overflow: hidden;
+}
+.faq-item__a {
+    padding: 0 26px 22px;
+    font-size: 0.97rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+    border-top: 1px solid rgba(13,31,60,0.06);
+    padding-top: 18px;
+    margin: 0 26px;
+    margin-bottom: 22px;
+}
+@media (max-width: 768px) {
+    .faq { padding: 80px 0; }
+    .faq-item__q { font-size: 0.97rem; }
+    .faq-item__btn { padding: 18px 20px; }
+    .faq-item__a { margin: 0 20px; margin-bottom: 18px; padding-top: 14px; }
+}
+</style>
+</head>
+<body>
+
+    <!-- Декоративный фон -->
+    <div class="bg-canvas" aria-hidden="true">
+        <div class="bg-orb bg-orb--1"></div>
+        <div class="bg-orb bg-orb--2"></div>
+        <div class="bg-orb bg-orb--3"></div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container header__container">
+            <a href="/" class="logo" aria-label="Рипол Бизнес — на главную">
+                <span class="logo__icon" aria-hidden="true">📘</span>
+                <span class="logo__text">Рипол Бизнес</span>
+            </a>
+            <nav class="nav" aria-label="Основное меню">
+                <button class="burger" aria-label="Открыть меню" aria-expanded="false">
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                </button>
+                <ul class="menu">
+                    <li class="menu__item"><a href="#" class="menu__link">Книга о бизнесе</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Книга в помощь бизнесу</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Книга визитка</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Консалтинг</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Другое</a></li>
+                    <li class="menu__item menu__item--phone">
+                        <a href="tel:79999999999" class="menu__link menu__link--phone">
+                            <span aria-hidden="true">📞</span> +7 999 999 99 99
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <a href="tel:79999999999" class="phone" aria-label="Позвонить по номеру 7 999 999 99 99">
+                <span class="phone__icon" aria-hidden="true">📞</span>
+                <span class="phone__number">+7 999 999 99 99</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Первый экран: Hero + преимущества -->
+        <section class="hero-section">
+            <div class="hero-section__bg" aria-hidden="true">
+                <div class="hero-section__grid"></div>
+                <div class="hero-section__glow hero-section__glow--1"></div>
+                <div class="hero-section__glow hero-section__glow--2"></div>
+            </div>
+            <div class="container">
+                <div class="hero reveal-up">
+                    <div class="hero__badge">
+                        <span class="hero__badge-dot"></span>
+                        Издательство с 1989 года
+                    </div>
+                    <h1 class="hero__title">Заказать издание книги<br>в Рипол Бизнес</h1>
+                    <p class="hero__descriptor">
+                        Издательство «Рипол Бизнес» предлагает полный цикл услуг по созданию и выпуску корпоративных книг.
+                        Мы поможем разработать концепцию, напишем текст, подготовим макет и напечатаем тираж.
+                        Ваша книга станет эффективным инструментом маркетинга, повышения лояльности клиентов и укрепления бренда.
+                    </p>
+                    <div class="hero__actions">
+                        <a href="#" class="btn btn--primary open-form-btn">
+                            <span>Заказать звонок</span>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="advantages">
+                    <h2 class="visually-hidden">Наши преимущества</h2>
+                    <ul class="advantages__list">
+                        <li class="advantages__item open-form-btn reveal-up" style="--delay:0.15s">
+                            <span class="advantages__icon" aria-hidden="true">📖</span>
+                            <h3 class="advantages__title">Редакционно-издательские услуги</h3>
+                            <span class="advantages__arrow" aria-hidden="true">→</span>
+                        </li>
+                        <li class="advantages__item open-form-btn reveal-up" style="--delay:0.25s">
+                            <span class="advantages__icon" aria-hidden="true">📚</span>
+                            <h3 class="advantages__title">Тираж от 100 штук</h3>
+                            <span class="advantages__arrow" aria-hidden="true">→</span>
+                        </li>
+                        <li class="advantages__item open-form-btn reveal-up" style="--delay:0.35s">
+                            <span class="advantages__icon" aria-hidden="true">📈</span>
+                            <h3 class="advantages__title">Маркетинговое продвижение</h3>
+                            <span class="advantages__arrow" aria-hidden="true">→</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Второй экран: Услуги -->
+        <section class="services">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <span class="section-label">Что мы делаем</span>
+                    <h2 class="services__title">Услуги</h2>
+                </div>
+                <ul class="services__list">
+                    <li class="services__item reveal-up" style="--delay:0.05s">
+                        <div class="service__image" role="img" aria-label="Книга о бизнесе">
+                            <span class="service__image-placeholder">📘</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Книга о бизнесе</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                    <li class="services__item reveal-up" style="--delay:0.1s">
+                        <div class="service__image" role="img" aria-label="Книга в помощь бизнесу">
+                            <span class="service__image-placeholder">📗</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Книга в помощь бизнесу</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                    <li class="services__item reveal-up" style="--delay:0.15s">
+                        <div class="service__image" role="img" aria-label="Книга визитка">
+                            <span class="service__image-placeholder">📕</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Книга визитка</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                    <li class="services__item reveal-up" style="--delay:0.2s">
+                        <div class="service__image" role="img" aria-label="Консалтинг">
+                            <span class="service__image-placeholder">📙</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Консалтинг</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                    <li class="services__item reveal-up" style="--delay:0.25s">
+                        <div class="service__image" role="img" aria-label="Кейсы">
+                            <span class="service__image-placeholder">📒</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Кейсы</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                    <li class="services__item reveal-up" style="--delay:0.3s">
+                        <div class="service__image" role="img" aria-label="Другое">
+                            <span class="service__image-placeholder">📓</span>
+                            <div class="service__image-overlay"></div>
+                        </div>
+                        <div class="service__body">
+                            <h3 class="service__name">Другое</h3>
+                            <a href="#" class="btn btn--order">Заказать</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Третий блок: Форма обратной связи -->
+        <section class="contact-form-section">
+            <div class="contact-form-section__bg" aria-hidden="true">
+                <div class="contact-form-section__grid"></div>
+            </div>
+            <div class="container">
+                <div class="contact-form-section__inner reveal-up">
+                    <div class="contact-form-section__text">
+                        <span class="section-label section-label--light">Обратная связь</span>
+                        <h3 class="contact-form-section__title">Есть вопросы?</h3>
+                        <p class="contact-form-section__subtitle">Оставьте заявку и наш менеджер свяжется с Вами и ответит на все Ваши вопросы.</p>
+                        <div class="contact-form-section__trust">
+                            <div class="trust-item"><span class="trust-item__dot"></span>Ответим в течение 30 минут</div>
+                            <div class="trust-item"><span class="trust-item__dot"></span>Бесплатная консультация</div>
+                            <div class="trust-item"><span class="trust-item__dot"></span>Без обязательств</div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="contactName">Имя</label>
+                            <input type="text" id="contactName" class="form-control" placeholder="Укажите имя" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contactPhone">Телефон</label>
+                            <input type="tel" id="contactPhone" class="form-control" placeholder="Укажите номер телефона" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" id="privacyCheckSection" required>
+                            <label for="privacyCheckSection">Я соглашаюсь на обработку персональных данных и соглашаюсь с <a href="#" target="_blank">политикой конфиденциальности</a>.</label>
+                        </div>
+                        <button type="submit" class="btn btn--form-submit btn--full">
+                            <span>Отправить заявку</span>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Четвёртый блок: Основные этапы работы -->
+        <section class="stages">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <span class="section-label section-label--light">Как мы работаем</span>
+                    <h2 class="stages__title">Основные этапы работы</h2>
+                </div>
+                <div class="stages__timeline">
+                    <div class="stage-item reveal-up" style="--delay:0.05s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">📋</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">01</span>
+                            <h3 class="stage-item__title">Заявка и консультация</h3>
+                            <p class="stage-item__desc">Вы оставляете заявку или звоните нам. Мы обсуждаем цели, бюджет и сроки, подбираем оптимальный формат будущей книги.</p>
+                        </div>
+                    </div>
+                    <div class="stage-item reveal-up" style="--delay:0.1s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">💡</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">02</span>
+                            <h3 class="stage-item__title">Разработка концепции</h3>
+                            <p class="stage-item__desc">Создаём структуру, продумываем уникальное торговое предложение, утверждаем оглавление и стилистику издания.</p>
+                        </div>
+                    </div>
+                    <div class="stage-item reveal-up" style="--delay:0.15s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">✍️</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">03</span>
+                            <h3 class="stage-item__title">Написание и редактирование</h3>
+                            <p class="stage-item__desc">Наши авторы и редакторы создают текст, который будет интересен вашей аудитории. Вы вносите правки на каждом этапе.</p>
+                        </div>
+                    </div>
+                    <div class="stage-item reveal-up" style="--delay:0.2s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">🎨</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">04</span>
+                            <h3 class="stage-item__title">Дизайн и вёрстка</h3>
+                            <p class="stage-item__desc">Разрабатываем уникальный макет, обложку и оформление. Готовим файлы для печати в соответствии с техническими требованиями.</p>
+                        </div>
+                    </div>
+                    <div class="stage-item reveal-up" style="--delay:0.25s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">🖨️</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">05</span>
+                            <h3 class="stage-item__title">Печать тиража</h3>
+                            <p class="stage-item__desc">Печатаем тираж от 100 экземпляров на современном оборудовании. Контролируем качество на всех этапах производства.</p>
+                        </div>
+                    </div>
+                    <div class="stage-item reveal-up" style="--delay:0.3s">
+                        <div class="stage-item__marker"><span class="stage-item__icon">🚀</span></div>
+                        <div class="stage-item__content">
+                            <span class="stage-item__step">06</span>
+                            <h3 class="stage-item__title">Доставка и продвижение</h3>
+                            <p class="stage-item__desc">Доставляем готовый тираж в любую точку России. Помогаем с маркетингом: презентации, соцсети, PR-кампании.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stages__action reveal-up">
+                    <a href="#" class="btn btn--cta btn--cta-dark open-form-btn">
+                        <span>Заказать</span>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Пятый блок: Наши преимущества -->
+        <section class="about">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <span class="section-label section-label--light">Почему мы</span>
+                    <h2 class="about__title">Наши преимущества</h2>
+                </div>
+                <div class="about__grid">
+                    <div class="about__column">
+                        <div class="about__item reveal-up" style="--delay:0.05s">
+                            <span class="about__num">01</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Издательский опыт с 1989 года</h3>
+                                <p class="about__item-text">Знаем книжный рынок изнутри — от рукописи до бестселлера.</p>
+                            </div>
+                        </div>
+                        <div class="about__item reveal-up" style="--delay:0.1s">
+                            <span class="about__num">02</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Полный цикл «под ключ»</h3>
+                                <p class="about__item-text">От идеи до доставки готового тиража — всё в одном издательстве.</p>
+                            </div>
+                        </div>
+                        <div class="about__item reveal-up" style="--delay:0.15s">
+                            <span class="about__num">03</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Современная полиграфия</h3>
+                                <p class="about__item-text">Цифровая и офсетная печать премиум-качества, тираж от 100 штук.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__column">
+                        <div class="about__item reveal-up" style="--delay:0.2s">
+                            <span class="about__num">04</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Маркетинговая поддержка</h3>
+                                <p class="about__item-text">Помогаем продвигать книгу: СМИ, соцсети, презентации, PR-кампании.</p>
+                            </div>
+                        </div>
+                        <div class="about__item reveal-up" style="--delay:0.25s">
+                            <span class="about__num">05</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Индивидуальный подход</h3>
+                                <p class="about__item-text">Каждый проект уникален — вы получаете не шаблон, а персональное решение.</p>
+                            </div>
+                        </div>
+                        <div class="about__item reveal-up" style="--delay:0.3s">
+                            <span class="about__num">06</span>
+                            <div class="about__item-content">
+                                <h3 class="about__item-title">Гарантия сроков и качества</h3>
+                                <p class="about__item-text">Фиксируем сроки в договоре, обеспечиваем высочайшее качество продукции.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+        <!-- Седьмой блок: Отзывы -->
+        <section class="reviews">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <span class="section-label">Что говорят клиенты</span>
+                    <h2 class="reviews__title">Отзывы</h2>
+                </div>
+                <div class="reviews__grid">
+
+                    <article class="review-card reveal-up" style="--delay:0.05s">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar">АК</div>
+                            <div class="review-card__info">
+                                <p class="review-card__name">Алексей Климов</p>
+                                <p class="review-card__role">Генеральный директор, ООО «Стратегия»</p>
+                            </div>
+                        </div>
+                        <div class="review-card__stars" aria-label="Оценка: 5 из 5">
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                        </div>
+                        <p class="review-card__text">Работали с Рипол Бизнес над корпоративной книгой к 20-летию компании. Команда профессионалов — чётко выдержали сроки, предложили несколько концепций оформления. Книга стала настоящим подарком для партнёров и сотрудников. Рекомендую без оговорок.</p>
+                        <p class="review-card__date">Март 2025</p>
+                    </article>
+
+                    <article class="review-card reveal-up" style="--delay:0.15s">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar review-card__avatar--gold">МВ</div>
+                            <div class="review-card__info">
+                                <p class="review-card__name">Марина Волкова</p>
+                                <p class="review-card__role">Основатель, консалтинговое агентство</p>
+                            </div>
+                        </div>
+                        <div class="review-card__stars" aria-label="Оценка: 5 из 5">
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                        </div>
+                        <p class="review-card__text">Заказывала «книгу-визитку» для развития личного бренда. Редакторы помогли структурировать мысли, дизайнеры создали стильное оформление. Клиенты регулярно спрашивают, где напечатана книга — это лучший показатель качества!</p>
+                        <p class="review-card__date">Январь 2025</p>
+                    </article>
+
+                    <article class="review-card reveal-up" style="--delay:0.25s">
+                        <div class="review-card__header">
+                            <div class="review-card__avatar review-card__avatar--teal">ДС</div>
+                            <div class="review-card__info">
+                                <p class="review-card__name">Дмитрий Соловьёв</p>
+                                <p class="review-card__role">Коммерческий директор, ГК «Импульс»</p>
+                            </div>
+                        </div>
+                        <div class="review-card__stars" aria-label="Оценка: 5 из 5">
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                            <span class="review-card__star" aria-hidden="true">★</span>
+                        </div>
+                        <p class="review-card__text">Издавали экспертную книгу по отраслевому рынку. Авторы издательства помогли превратить сухие данные в увлекательный текст. Книга отлично работает на выставках — её берут охотнее любого буклета. Вложение полностью себя оправдало.</p>
+                        <p class="review-card__date">Ноябрь 2024</p>
+                    </article>
+
+                </div>
+                <div class="reviews__action reveal-up">
+                    <a href="http://business.ripol.ru/otzyvy" class="btn btn--reviews" target="_blank" rel="noopener">
+                        <span>Больше отзывов</span>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Шестой блок: Форма обратной связи -->
+        <!-- Шестой блок: Форма обратной связи -->
+        <section class="cta-form-section">
+            <div class="cta-form-section__bg" aria-hidden="true">
+                <div class="cta-form-section__grid"></div>
+                <div class="cta-form-section__glow cta-form-section__glow--1"></div>
+                <div class="cta-form-section__glow cta-form-section__glow--2"></div>
+            </div>
+            <div class="container">
+                <div class="cta-form-section__inner reveal-up">
+                    <div class="cta-form-section__text">
+                        <span class="section-label section-label--light">Напишите нам</span>
+                        <h2 class="cta-form-section__title">Есть вопросы?</h2>
+                        <p class="cta-form-section__subtitle">Оставьте заявку и наш менеджер свяжется с Вами и ответит на все Ваши вопросы.</p>
+                        <div class="cta-form-section__trust contact-form-section__trust">
+                            <div class="trust-item"><span class="trust-item__dot"></span>Ответим в течение 30 минут</div>
+                            <div class="trust-item"><span class="trust-item__dot"></span>Бесплатная консультация</div>
+                            <div class="trust-item"><span class="trust-item__dot"></span>Без обязательств</div>
+                        </div>
+                    </div>
+                    <form class="cta-form" id="ctaForm" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="ctaName">Имя</label>
+                            <input type="text" id="ctaName" class="form-control" placeholder="Укажите имя" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctaPhone">Телефон</label>
+                            <input type="tel" id="ctaPhone" class="form-control" placeholder="Укажите номер телефона" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" id="privacyCheckCta" required>
+                            <label for="privacyCheckCta">Я соглашаюсь на обработку персональных данных и соглашаюсь с <a href="#" target="_blank">политикой конфиденциальности</a>.</label>
+                        </div>
+                        <button type="submit" class="btn btn--cta-submit">
+                            <span>Отправить заявку</span>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Восьмой блок: FAQ -->
+        <section class="faq">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <span class="section-label">Вопросы и ответы</span>
+                    <h2 class="faq__title">Часто задаваемые вопросы</h2>
+                </div>
+                <ul class="faq__list" role="list">
+
+                    <li class="faq-item reveal-up" style="--delay:0.05s">
+                        <button class="faq-item__btn" aria-expanded="false">
+                            <span class="faq-item__q">Сколько стоит издание корпоративной книги?</span>
+                            <span class="faq-item__icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#5a677a" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-item__body" role="region">
+                            <div class="faq-item__body-inner">
+                                <p class="faq-item__a">Стоимость зависит от объёма, тиража, сложности дизайна и выбранных материалов. Минимальный бюджет проекта начинается от 150 000 рублей. Мы всегда готовим индивидуальное коммерческое предложение после первой консультации — свяжитесь с нами, чтобы получить точный расчёт под ваш проект.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item reveal-up" style="--delay:0.1s">
+                        <button class="faq-item__btn" aria-expanded="false">
+                            <span class="faq-item__q">Какой минимальный тираж вы печатаете?</span>
+                            <span class="faq-item__icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#5a677a" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-item__body" role="region">
+                            <div class="faq-item__body-inner">
+                                <p class="faq-item__a">Минимальный тираж — 100 экземпляров. Для небольших тиражей мы используем цифровую печать, для больших — офсетную, что существенно снижает стоимость одного экземпляра. Оптимальный тираж подберём вместе с вами на этапе консультации.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item reveal-up" style="--delay:0.15s">
+                        <button class="faq-item__btn" aria-expanded="false">
+                            <span class="faq-item__q">Сколько времени занимает создание книги от идеи до печати?</span>
+                            <span class="faq-item__icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#5a677a" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-item__body" role="region">
+                            <div class="faq-item__body-inner">
+                                <p class="faq-item__a">Средний срок полного цикла — от 2 до 5 месяцев. Простые проекты (книга-визитка, небольшой объём) реализуются быстрее — от 6 недель. Крупные издания с большим объёмом контента, иллюстрациями и сложным дизайном требуют больше времени. Все сроки фиксируются в договоре.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item reveal-up" style="--delay:0.2s">
+                        <button class="faq-item__btn" aria-expanded="false">
+                            <span class="faq-item__q">Нужно ли мне самому писать текст книги?</span>
+                            <span class="faq-item__icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#5a677a" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-item__body" role="region">
+                            <div class="faq-item__body-inner">
+                                <p class="faq-item__a">Нет. Мы предлагаем полный цикл «под ключ»: наши авторы-призраки (ghostwriters) создадут текст на основе ваших материалов, интервью и экспертных знаний. Вы участвуете в утверждении структуры и вносите правки на каждом этапе — финальная книга будет звучать вашим голосом.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item reveal-up" style="--delay:0.25s">
+                        <button class="faq-item__btn" aria-expanded="false">
+                            <span class="faq-item__q">Помогаете ли вы с продвижением книги после издания?</span>
+                            <span class="faq-item__icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#5a677a" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-item__body" role="region">
+                            <div class="faq-item__body-inner">
+                                <p class="faq-item__a">Да. Мы предоставляем полноценную маркетинговую поддержку: организацию презентаций, PR-кампании, размещение в СМИ, продвижение в социальных сетях и на профессиональных площадках. Книга — это инструмент, и мы поможем заставить его работать на ваш бизнес максимально эффективно.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer class="footer" aria-label="Подвал сайта">
+        <div class="footer__bg" aria-hidden="true">
+            <div class="footer__orb footer__orb--1"></div>
+            <div class="footer__orb footer__orb--2"></div>
+        </div>
+        <div class="container">
+            <div class="footer__top">
+
+                <!-- Бренд -->
+                <div class="footer__brand">
+                    <a href="/" class="footer__logo" aria-label="Рипол Бизнес — на главную">
+                        <span class="footer__logo-icon" aria-hidden="true">📘</span>
+                        <span class="footer__logo-text">Рипол Бизнес</span>
+                    </a>
+                    <p class="footer__tagline">
+                        Издательство полного цикла. Создаём корпоративные книги, которые работают на ваш бизнес.
+                    </p>
+                    <div class="footer__contacts">
+                        <a href="tel:79999999999" class="footer__contact-link">
+                            <span class="footer__contact-icon" aria-hidden="true">📞</span>
+                            +7 999 999 99 99
+                        </a>
+                        <a href="mailto:info@ripol-business.ru" class="footer__contact-link">
+                            <span class="footer__contact-icon" aria-hidden="true">✉️</span>
+                            info@ripol-business.ru
+                        </a>
+                        <a href="#" class="footer__contact-link">
+                            <span class="footer__contact-icon" aria-hidden="true">📍</span>
+                            Москва, Россия
+                        </a>
+                    </div>
+                    <div class="footer__badge">
+                        <span class="footer__badge-icon">🏆</span>
+                        Издательство с 1989 года
+                    </div>
+                </div>
+
+                <!-- Услуги -->
+                <div class="footer__col">
+                    <span class="footer__col-title">Услуги</span>
+                    <ul class="footer__nav">
+                        <li><a href="#" class="footer__nav-link">Книга о бизнесе</a></li>
+                        <li><a href="#" class="footer__nav-link">Книга в помощь бизнесу</a></li>
+                        <li><a href="#" class="footer__nav-link">Книга визитка</a></li>
+                        <li><a href="#" class="footer__nav-link">Консалтинг</a></li>
+                        <li><a href="#" class="footer__nav-link">Кейсы</a></li>
+                        <li><a href="#" class="footer__nav-link">Другое</a></li>
+                    </ul>
+                </div>
+
+                <!-- О компании -->
+                <div class="footer__col">
+                    <span class="footer__col-title">Компания</span>
+                    <ul class="footer__nav">
+                        <li><a href="#" class="footer__nav-link">О нас</a></li>
+                        <li><a href="#" class="footer__nav-link">Наши проекты</a></li>
+                        <li><a href="#" class="footer__nav-link">Отзывы клиентов</a></li>
+                        <li><a href="#" class="footer__nav-link">Блог</a></li>
+                        <li><a href="#" class="footer__nav-link">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <!-- Информация -->
+                <div class="footer__col">
+                    <span class="footer__col-title">Информация</span>
+                    <ul class="footer__nav">
+                        <li><a href="#" class="footer__nav-link">Вопросы и ответы</a></li>
+                        <li><a href="#" class="footer__nav-link">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="container">
+                <div class="footer__bottom-inner">
+                    <p class="footer__copyright">© 2026 Рипол Бизнес. Все права защищены.</p>
+                    <ul class="footer__legal" aria-label="Юридические ссылки">
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="callbackModal" aria-hidden="true" role="dialog">
+        <div class="modal__overlay" data-close="true"></div>
+        <div class="modal__container">
+            <button class="modal__close" aria-label="Закрыть окно" data-close="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+            <div class="modal__body">
+                <div class="modal__icon" aria-hidden="true">💬</div>
+                <h2 class="modal__title">Есть вопросы?</h2>
+                <p class="modal__subtitle">Оставьте заявку и наш менеджер свяжется с Вами и ответит на все Ваши вопросы.</p>
+                <form class="callback-form" id="callbackForm">
+                    <div class="form-group">
+                        <label class="form-label" for="modalName">Имя</label>
+                        <input type="text" id="modalName" class="form-control" placeholder="Укажите имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="modalPhone">Телефон</label>
+                        <input type="tel" id="modalPhone" class="form-control" placeholder="Укажите номер телефона" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" id="privacyCheckModal" required>
+                        <label for="privacyCheckModal">Я соглашаюсь на обработку персональных данных и соглашаюсь с <a href="#" target="_blank">политикой конфиденциальности</a>.</label>
+                    </div>
+                    <button type="submit" class="btn btn--submit btn--full">
+                        <span>Отправить заявку</span>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+
+    /* ── Burger menu ───────────────────────────────────── */
+    const burger = document.querySelector('.burger');
+    const menu   = document.querySelector('.menu');
+
+    if (burger && menu) {
+        burger.addEventListener('click', () => {
+            const expanded = burger.getAttribute('aria-expanded') === 'true';
+            burger.setAttribute('aria-expanded', !expanded);
+            menu.classList.toggle('menu--open');
+        });
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!burger.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('menu--open');
+                burger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    /* ── Sticky header ─────────────────────────────────── */
+    const header = document.getElementById('header');
+    if (header) {
+        const onScroll = () => {
+            header.classList.toggle('scrolled', window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    /* ── Scroll reveal ─────────────────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal-up');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => io.observe(el));
+    } else {
+        // Fallback for old browsers
+        revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+
+    /* ── Modal ─────────────────────────────────────────── */
+    const modal        = document.getElementById('callbackModal');
+    const openButtons  = document.querySelectorAll('.open-form-btn');
+    const closeEls     = modal.querySelectorAll('[data-close]');
+    const body         = document.body;
+
+    function openModal() {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        body.classList.add('no-scroll');
+        // Focus first input
+        setTimeout(() => {
+            const first = modal.querySelector('input');
+            if (first) first.focus();
+        }, 50);
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        body.classList.remove('no-scroll');
+    }
+
+    openButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    closeEls.forEach(el => {
+        el.addEventListener('click', () => closeModal());
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+
+    /* ── Form: modal ───────────────────────────────────── */
+    const modalForm = document.getElementById('callbackForm');
+    if (modalForm) {
+        modalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена.');
+            modalForm.reset();
+            closeModal();
+        });
+    }
+
+    /* ── Form: section ─────────────────────────────────── */
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена.');
+            contactForm.reset();
+        });
+    }
+
+
+    /* ── CTA form (block 6) ────────────────────────────────── */
+    const ctaForm = document.getElementById('ctaForm');
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена.');
+            ctaForm.reset();
+        });
+    }
+
+    /* ── FAQ accordion ─────────────────────────────────────── */
+    document.querySelectorAll('.faq-item__btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('is-open');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('is-open');
+                el.querySelector('.faq-item__btn').setAttribute('aria-expanded', 'false');
+            });
+
+            // Toggle clicked
+            if (!isOpen) {
+                item.classList.add('is-open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
